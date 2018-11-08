@@ -81,9 +81,10 @@ class wsjs {
     }
 
     destroy() {
-
+        //draw black box over window
         this.ctx.fillRect(this.x, this.y - this.overheadHeight, this.w + 1, this.h + this.overheadHeight + 2);
 
+        //dont draw it again
         this.alive = false;
         this.x = Number.MAX_SAFE_INTEGER;
         this.y = Number.MAX_SAFE_INTEGER;
@@ -128,5 +129,4 @@ class wsjs {
             }
         }
     }
-
 }
