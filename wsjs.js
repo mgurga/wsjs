@@ -11,9 +11,11 @@ class wsjs {
         this.dragxstart = 0;
         this.dragystart = 0;
         this.overheadHeight = 10;
+        this.overheadOptionsWidth = 10;
         this.ctx = ctx;
         this.alive = true;
-
+        this.windowName = "Window";
+        
         //enable clicking
         var _this = this;
         this.canvas.addEventListener('mousedown', function(e) {
@@ -75,7 +77,7 @@ class wsjs {
             };
         }
     }
-
+// Honestly tho you dont even have it working and it is actually pointless
     clicked(x, y) {
         console.log(x + ',' + y);
     }
@@ -101,11 +103,15 @@ class wsjs {
             this.ctx.strokeRect(this.x, this.y - this.overheadHeight, this.w, this.h + 10); // menu
             this.ctx.beginPath();
             this.ctx.moveTo(this.x, this.y - 3);
-            this.ctx.lineTo(this.x + this.w - 10, this.y - 3);
+            this.ctx.lineTo(this.x + this.w - this.overheadOptionsWidth, this.y - 3);
             this.ctx.stroke();
             this.ctx.beginPath();
             this.ctx.moveTo(this.x, this.y - 7);
-            this.ctx.lineTo(this.x + this.w - 10, this.y - 7);
+            this.ctx.lineTo(this.x + this.w - this.overheadOptionsWidth, this.y - 7);
+            this.ctx.stroke();
+            this.ctx.beginPath();
+            this.ctx.moveTo(this.x + this.w - this.overheadOptionsWidth, this.y - this.overheadHeight);
+            this.ctx.lineTo(this.x + this.w - this.overheadOptionsWidth, this.y);
             this.ctx.stroke();
             this.ctx.strokeRect(this.x, this.y, this.w, this.h); // content
 
