@@ -1,51 +1,56 @@
 <!doctype html>
 <html>
 
-     <head>
-          <title>wsjs</title>
-     </head>
+<head>
+    <title>wsjs</title>
+</head>
 
-     <body>
-         <div class="canvas">
-             <canvas width="1000" height="500" id="wsjsCanvas">your browser does not support the canvas element</canvas>
+<body>
+    <div class="canvas">
+        <canvas width="1280" height="720" id="wsjsCanvas">your browser does not support the canvas element</canvas>
 
-         </div>
-     </body>
+    </div>
+</body>
 
-     <script src="wsjs.js"></script>
-     <script>
-         var c = document.getElementById("wsjsCanvas");
-         var ctx = c.getContext('2d');
+<script src="wsjs.js"></script>
+<script>
+    var c = document.getElementById("wsjsCanvas");
+    c.retinaResolutionEnabled = false;
+    var ctx = c.getContext('2d');
 
-         var windows = [];
+    var windows = [];
 
-         for(var i = 0; i < 10; i++) {
-             windows[i] = new wsjs(randomNum(0,c.width),randomNum(0,c.height),200,100,c,ctx);
-         }
+    for (var i = 0; i < 10; i++) {
+        windows[i] = new wsjs(randomNum(0, c.width), randomNum(0, c.height), 200, 100, c, ctx);
+    }
 
-         setInterval(function() {
-             for(var i = 0; i < 10; i++) {
-                 windows[i].draw();
-             }
-         }, 100);
+    for (var i = 0; i < 10; i++) {
+        windows[i].draw();
+    }
 
+    setInterval(function() {
+        for (var i = 0; i < 10; i++) {
+            windows[i].draw();
+        }
+    }, 100);
 
-         function randomNum(min, max) {
-             return Math.floor(Math.random() * (max - min) ) + min;
-         }
+    function randomNum(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
 
-     </script>
+</script>
 
-     <style>
-         body {
-             background-color: black;
-         }
-         .canvas {
-           display: inline-block;
-           border-style: dashed;
-           border-width: 5px;
-           border-color: red;
-         }
-     </style>
+<style>
+    body {
+        background-color: black;
+    }
+
+    .canvas {
+        display: inline-block;
+        border-style: dashed;
+        border-width: 5px;
+        border-color: red;
+    }
+</style>
 
 </html>
