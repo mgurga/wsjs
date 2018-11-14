@@ -309,7 +309,13 @@ class wsjs {
 
             if (willDraw) {
                 _this.ctx.fillStyle = "#FFFFFF";
-                _this.ctx.textAlign = "start";
+
+                if(!eleData.textAlign == undefined) {
+                    _this.ctx.textAlign = "start";
+                }
+                if(!eleData.font == undefined {
+                    _this.ctx.font = eleData.font;
+                }
                 _this.ctx.fillText(eleData.text, eleData.x + _this.x, eleData.y + _this.y);
             }
         }
@@ -462,5 +468,4 @@ class wsjs {
         this.ctx.strokeStyle = "#FFFFFF";
 
     }
-
 }
