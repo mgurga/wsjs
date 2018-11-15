@@ -27,7 +27,7 @@
     var machineCost = [100, 1000];
     var tokenRaiseInc = 10;
     buttonClicker.windowName = "Super Button Clicker";
-    buttonClicker.setWindowTab(0 * 100, c.height - 20, 99, 20, "windowTab " + 0);
+    buttonClicker.setWindowTab(0 * 100, c.height - 20, 99, 20, "SBC ");
     buttonClicker.createElement({"type": "button","x":40, "y":50, "w":200, "h":75,"id":"testButton","onclick":"buttonClicked();"});
     buttonClicker.createElement({"type": "label", "x":40, "y":30, "text":"Click Tokens: 0", "id":"scoreLabel"});
     buttonClicker.createElement({"type": "label", "x":80, "y":90, "text":"GET TOKENS", "id":"getClicksLabel"});
@@ -43,6 +43,8 @@
     buttonClicker.createElement({"type": "label", "x":150, "y":235, "text":"+10 tps", "id":"littleClickerLabel2", "font":"15px Monospace"});
 
     buttonCheater.windowName = "SBC Hack";
+    buttonCheater.setWindowTab(1 * 100, c.height - 20, 99, 20, "SBC Hack");
+
     buttonCheater.createElement({"type": "label", "x":10, "y":20, "text":"increase tokens by increment", "id":"littleClickerLabel2", "font":"15px Monospace"});
     buttonCheater.createElement({"type": "button","x":10, "y":70, "w":90, "h":40,"id":"leftTokens","onclick":"tokens-=tokenRaiseInc"});
     buttonCheater.createElement({"type": "button","x":190, "y":70, "w":90, "h":40,"id":"rightTokens","onclick":"tokens+=tokenRaiseInc"});
@@ -93,6 +95,12 @@
 
         buttonClicker.draw();
         buttonCheater.draw();
+
+        if(!buttonClicker.alive && !buttonCheater.alive) {
+            ctx.fillStyle = "#FFFFFF";
+            ctx.font = "30px Monospace";
+            ctx.fillText("Refresh page to recreate windows", 100, 100);
+        }
 
     }, 100);
 
