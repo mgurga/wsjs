@@ -310,10 +310,13 @@ class wsjs {
             if (willDraw) {
                 _this.ctx.fillStyle = "#FFFFFF";
 
-                if(!eleData.textAlign == undefined) {
+                if (!eleData.textAlign == undefined) {
                     _this.ctx.textAlign = "start";
                 }
-                if(!eleData.font == undefined {
+
+                if (eleData.font == undefined) {
+                    _this.ctx.font = "20px Monospace";
+                } else {
                     _this.ctx.font = eleData.font;
                 }
                 _this.ctx.fillText(eleData.text, eleData.x + _this.x, eleData.y + _this.y);
