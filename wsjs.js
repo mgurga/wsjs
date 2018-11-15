@@ -31,6 +31,8 @@ class wsjs {
         this.windowName = "Window";
         this.windowOptions = "minimize,close"; //not in use TODO
         this.elements = [];
+        this.primaryColor = "#55FF55";
+        this.backgroundColor = "#0000FF"
 
         //enable clicking
         var _this = this;
@@ -172,7 +174,7 @@ class wsjs {
         this.fillStyle = "#000000";
         this.ctx.fillRect(this.x, this.y - this.overheadHeight, this.w + 1, this.h + this.overheadHeight + 2);
 
-        this.strokeStyle = "#FFFFFF";
+        this.strokeStyle = this.primaryColor;
         this.ctx.strokeRect(this.x, this.y - this.overheadHeight, this.w + 1, this.h + this.overheadHeight + 2);
 
         this.ctx.strokeRect(this.x, this.y, this.w, this.h);
@@ -308,7 +310,7 @@ class wsjs {
             }
 
             if (willDraw) {
-                _this.ctx.fillStyle = "#FFFFFF";
+                _this.ctx.fillStyle = _this.primaryColor;
 
                 if (!eleData.textAlign == undefined) {
                     _this.ctx.textAlign = "start";
@@ -348,7 +350,7 @@ class wsjs {
 
             if (willDraw) {
                 _this.ctx.fillStyle = "#000000";
-                _this.ctx.strokeStyle = "#FFFFFF";
+                _this.ctx.strokeStyle = _this.primaryColor;
                 if (eleData.clicked == true) {
                     //draw both shaded and stroked on top of eachother to simulate a button being clicked
                     _this.drawShadedRect(_this.x + eleData.x + 5, _this.y + eleData.y + 5, eleData.w, eleData.h);
@@ -382,12 +384,12 @@ class wsjs {
             //console.log(ctx.measureText(this.windowName));
             //draws overlay bar and content box respectivly
             this.ctx.lineWidth = 1;
-            this.ctx.fillStyle = "#FFFFFF";
+            this.ctx.fillStyle = this.primaryColor;
 
             this.ctx.textAlign = "start";
             this.ctx.fillText(this.windowName, this.x, this.y, this.w - this.overheadHeight * 2);
             this.ctx.fillStyle = "#000000";
-            this.ctx.strokeStyle = "#FFFFFF";
+            this.ctx.strokeStyle = this.primaryColor;
             this.ctx.strokeRect(this.x, this.y - this.overheadHeight, this.w, this.h + this.overheadHeight); // menu
 
             // lines between name and options
@@ -446,13 +448,13 @@ class wsjs {
 
         if (this.windowTab.created && this.alive) {
             //DRAWS TAB
-            var boxStrokeBackground = "#FFFFFF";
+            var boxStrokeBackground = this.primaryColor;
             var boxFillBackground = "#000000";
-            var tabNameColor = "#FFFFFF";
+            var tabNameColor = this.primaryColor;
 
             if (this.minimizeData.minimized) {
                 boxStrokeBackground = "#000000"
-                boxFillBackground = "#FFFFFF";
+                boxFillBackground = this.primaryColor;
                 tabNameColor = "#000000";
             }
 
@@ -468,7 +470,7 @@ class wsjs {
         }
 
         this.ctx.fillStyle = "#000000";
-        this.ctx.strokeStyle = "#FFFFFF";
+        this.ctx.strokeStyle = this.primaryColor;
 
     }
 }

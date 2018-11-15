@@ -19,19 +19,36 @@
     c.retinaResolutionEnabled = false;
     var ctx = c.getContext('2d');
 
-    var buttonClicker = new wsjs(100, 100, 300, 400, c, ctx);
+    var buttonClicker = new wsjs(100, 100, 300, 300, c, ctx);
+    var buttonCheater = new wsjs(450, 100, 300, 170, c, ctx);
     var tokens = 0;
     var machines = [];
+    var machinesTotal = {0:0,1:0};
+    var machineCost = [100, 1000];
+    var tokenRaiseInc = 10;
     buttonClicker.windowName = "Super Button Clicker";
     buttonClicker.setWindowTab(0 * 100, c.height - 20, 99, 20, "windowTab " + 0);
     buttonClicker.createElement({"type": "button","x":40, "y":50, "w":200, "h":75,"id":"testButton","onclick":"buttonClicked();"});
     buttonClicker.createElement({"type": "label", "x":40, "y":30, "text":"Click Tokens: 0", "id":"scoreLabel"});
     buttonClicker.createElement({"type": "label", "x":80, "y":90, "text":"GET TOKENS", "id":"getClicksLabel"});
 
-    buttonClicker.createElement({"type": "button","x":40, "y":150, "w":175, "h":40,"id":"littleClicker","onclick":"boughtMachine(1)"});
+    buttonClicker.createElement({"type": "button","x":40, "y":150, "w":175, "h":40,"id":"littleClicker","onclick":"boughtMachine(0)"});
     buttonClicker.createElement({"type": "label", "x":50, "y":170, "text":"little", "id":"littleClickerLabel", "font":"15px Monospace"});
     buttonClicker.createElement({"type": "label", "x":50, "y":180, "text":"clicker", "id":"littleClickerLabel2", "font":"15px Monospace"});
     buttonClicker.createElement({"type": "label", "x":150, "y":175, "text":"+1 tps", "id":"littleClickerLabel2", "font":"15px Monospace"});
+
+    buttonClicker.createElement({"type": "button","x":40, "y":210, "w":175, "h":40,"id":"littleClicker","onclick":"boughtMachine(1)"});
+    buttonClicker.createElement({"type": "label", "x":50, "y":230, "text":"big", "id":"littleClickerLabel", "font":"15px Monospace"});
+    buttonClicker.createElement({"type": "label", "x":50, "y":240, "text":"clicker", "id":"littleClickerLabel2", "font":"15px Monospace"});
+    buttonClicker.createElement({"type": "label", "x":150, "y":235, "text":"+10 tps", "id":"littleClickerLabel2", "font":"15px Monospace"});
+
+    buttonCheater.windowName = "SBC Hack";
+    buttonCheater.createElement({"type": "label", "x":10, "y":20, "text":"increase tokens by increment", "id":"littleClickerLabel2", "font":"15px Monospace"});
+    buttonCheater.createElement({"type": "button","x":10, "y":70, "w":90, "h":40,"id":"leftTokens","onclick":"tokens-=tokenRaiseInc"});
+    buttonCheater.createElement({"type": "button","x":190, "y":70, "w":90, "h":40,"id":"rightTokens","onclick":"tokens+=tokenRaiseInc"});
+    buttonCheater.createElement({"type": "button","x":120, "y":25, "w":50, "h":40,"id":"upTokens","onclick":"tokenRaiseInc+=1"});
+    buttonCheater.createElement({"type": "button","x":120, "y":120, "w":50, "h":40,"id":"downTokens","onclick":"tokenRaiseInc-=1"});
+    buttonCheater.createElement({"type":"label", "x": 120, "y":100, "text":tokenRaiseInc, "id":"raiseLabel"});
 
     function buttonClicked() {
         tokens++;
@@ -39,25 +56,43 @@
     }
 
     function boughtMachine(type) {
-        if(type == 1 && tokens >= 100) {
-            machines[machines.length] = type;
-            tokens -= 100;
-        } else {
-            alert("not enough tokens, requires 100");
+        if(type == 0) {
+            if(tokens >= machineCost[type]) {
+                machines[machines.length] = type;
+                tokens -= machineCost[type];
+                machineCost[type] += machinesTotal[type] * 2;
+                machinesTotal[type] += 1;
+            } else {
+                alert("not enough tokens, requires " + machineCost[type]);
+            }
         }
+        if(type == 1) {
+        if(tokens >= machineCost[type]) {
+            machines[machines.length] = type;
+            tokens -= machineCost[type];
+            machineCost[type] += machinesTotal[type] * 2;
+            machinesTotal[type] += 1;
+        } else {
+            alert("not enough tokens, requires " + machineCost[type]);
+        }
+    }
     }
 
     setInterval(function() {
         for(var i = 0; i < machines.length; i++) {
-            if(machines[i] == 1) {
+            if(machines[i] == 0) {
                 tokens += 1;
             }
         }
-        buttonClicker.editElement("scoreLabel", "text", "Click Tokens: " + tokens);
+
     }, 1000);
 
     setInterval(function() {
+        buttonCheater.editElement("raiseLabel", "text", tokenRaiseInc);
+        buttonClicker.editElement("scoreLabel", "text", "Click Tokens: " + tokens);
+
         buttonClicker.draw();
+        buttonCheater.draw();
 
     }, 100);
 
